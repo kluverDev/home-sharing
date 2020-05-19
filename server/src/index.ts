@@ -13,9 +13,10 @@ const mount = async (app: Application) => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => ({ db }), //provides db in all files via context
+    context: () => ({ db }), //provides db in all resolvers via context
   }); // my appolo server
   server.applyMiddleware({ app, path: "/api" }); //specifying express app instance & graphql api
+  app.listen(process.env.PORT);
 
   const listings = await db.listings.find({}).toArray();
   console.log(listings);
