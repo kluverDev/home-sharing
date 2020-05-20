@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { IResolvers } from "apollo-server-express";
-import { Database, Listing } from "../lib/types";
+import { Database, Listing } from "../../../lib/types";
 import { ObjectId } from "mongodb";
 
-export const resolvers: IResolvers = {
+export const listingResolvers: IResolvers = {
   Query: {
     listings: async (
       _root: undefined,
