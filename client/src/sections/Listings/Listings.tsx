@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { server } from "../../lib/api";
 import {
   DeleteListingData,
   DeleteListingVariables,
   ListingsData,
+  Listing,
 } from "./types";
 
 const LISTINGS = `
@@ -38,27 +39,44 @@ interface Props {
 }
 
 export const Listings = ({ title }: Props) => {
+  const [listings, setListings] = useState<Listing[] | null>(null);
+
   const fetchListings = async () => {
     const { data } = await server.fetch<ListingsData>({ query: LISTINGS });
-    console.log(data);
+    setListings(data.listings);
   };
-  const deleteListing = async () => {
+  const deleteListing = async (id: string) => {
     const { data } = await server.fetch<
       DeleteListingData,
       DeleteListingVariables
     >({
       query: DELETE_LISTING,
       variables: {
-        id: "5ec44c685981983378d78676", // hardcoded id variable,
+        id,
       },
     });
+    fetchListings();
+
     console.log(data); // check the console to see the result of the mutation!
   };
+  const listingsList = listings ? (
+    <ul>
+      {listings.map((listing) => {
+        return (
+          <li key={listing.id}>
+            {listing.title}{" "}
+            <button onClick={() => deleteListing(listing.id)}>Delete</button>
+          </li>
+        );
+      })}
+    </ul>
+  ) : null;
+
   return (
     <div>
       <h2>{title}</h2>
+      {listingsList}
       <button onClick={fetchListings}>Query Listings!</button>
-      <button onClick={deleteListing}>Delete a listing!</button>
     </div>
   );
 };
