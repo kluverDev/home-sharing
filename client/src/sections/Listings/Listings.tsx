@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { server } from "../../lib/api";
+import { server, useQuery } from "../../lib/api";
 import {
   DeleteListingData,
   DeleteListingVariables,
@@ -39,34 +39,22 @@ interface Props {
 }
 
 export const Listings = ({ title }: Props) => {
-  const [listings, setListings] = useState<Listing[] | null>(null);
+  console.log("i am running inside listing");
 
-  useEffect(() => {
-    fetchListings();
-    if (listings && listings.length) {
-      console.log("Listings Exist!");
-    }
-    console.log("Effect has run!");
-  }, []);
+  const { data } = useQuery<ListingsData>(LISTINGS);
 
-  const fetchListings = async () => {
-    const { data } = await server.fetch<ListingsData>({ query: LISTINGS });
-    setListings(data.listings);
-  };
   const deleteListing = async (id: string) => {
-    const { data } = await server.fetch<
-      DeleteListingData,
-      DeleteListingVariables
-    >({
+    await server.fetch<DeleteListingData, DeleteListingVariables>({
       query: DELETE_LISTING,
       variables: {
         id,
       },
     });
-    fetchListings();
-
-    console.log(data); // check the console to see the result of the mutation!
   };
+
+  const listings = data ? data.listings : null;
+  console.log("i am running outside");
+
   const listingsList = listings ? (
     <ul>
       {listings.map((listing) => {
@@ -84,6 +72,7 @@ export const Listings = ({ title }: Props) => {
     <div>
       <h2>{title}</h2>
       {listingsList}
+      {console.log("i am running inside")}
     </div>
   );
 };
