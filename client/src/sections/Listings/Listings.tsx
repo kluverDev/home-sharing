@@ -41,7 +41,7 @@ interface Props {
 export const Listings = ({ title }: Props) => {
   console.log("i am running inside listing");
 
-  const { data } = useQuery<ListingsData>(LISTINGS);
+  const { data, refetch } = useQuery<ListingsData>(LISTINGS);
 
   const deleteListing = async (id: string) => {
     await server.fetch<DeleteListingData, DeleteListingVariables>({
@@ -50,6 +50,7 @@ export const Listings = ({ title }: Props) => {
         id,
       },
     });
+    refetch();
   };
 
   const listings = data ? data.listings : null;
