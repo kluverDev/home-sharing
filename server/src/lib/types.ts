@@ -1,17 +1,5 @@
 import { ObjectId, Collection } from "mongodb";
 
-export interface Listing {
-  _id: ObjectId;
-  title: string;
-  image: string;
-  address: string;
-  price: number;
-  numOfGuests: number;
-  numOfBeds: number;
-  numOfBaths: number;
-  rating: number;
-}
-
 export interface Booking {
   _id: ObjectId;
 }
@@ -60,7 +48,9 @@ export interface Listing {
   bookings: ObjectId[];
   bookingsIndex: BookingsIndex;
   price: number;
+  numOfGuests: number;
 }
+
 export interface Booking {
   _id: ObjectId;
   listing: ObjectId;

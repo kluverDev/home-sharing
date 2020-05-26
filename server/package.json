@@ -12,6 +12,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "tsc -p ./",
+    "clear": "ts-node temp/clear.ts",
     "seed": "ts-node temp/seed.ts"
   },
   "devDependencies": {
