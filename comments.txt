@@ -1,0 +1,23 @@
+Apollo Server enables us to connect a GraphQL schema to a server and can do other things too.
+     --so this is the approach we would be taking
+1-install appolo-server
+2-install graphql and its type declaration
+3-install express and body-parseur
+4-install apollo-server-express
+5- install mongodb and types declaration file -D
+6- install dotenv and types declaration file -declaration
+7- install lodash and type declaration file
+
+
+1--apollo-boost @apollo/react-hooks graphql
+2--@types/graphql --save
+3-- no more use of src/lib folder after 8.2 client
+4-- use the official Apollo CLI to generate static types from our GraphQL API. to prevent us from manuall doing it.
+5-check package.json
+6--no more use of custorm defined types in types.ts
+
+
+Tinyhouse-Proper client
+1--install react-router-dom and its type declaration file
+
+Tinyhouse-Proper server

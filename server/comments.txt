@@ -1,5 +1,0 @@
-Apollo Server enables us to connect a GraphQL schema to a server and can do other things too.
-     --so this is the approach we would be taking
-1-install appolo-server
-2-install graphql and its type declaration
-3-
