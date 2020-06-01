@@ -21,3 +21,4 @@ Tinyhouse-Proper client
 1--install react-router-dom and its type declaration file
 
 Tinyhouse-Proper server
+1--add googleapi
