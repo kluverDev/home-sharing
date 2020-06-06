@@ -1,4 +1,5 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
+require("dotenv").config();
 
 const auth = new google.auth.OAuth2(
   process.env.G_CLIENT_ID,
