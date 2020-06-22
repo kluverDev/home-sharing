@@ -117,8 +117,12 @@ export const viewerResolvers: IResolvers = {
         throw new Error(`Failed to log in: ${error}`);
       }
     },
-    logOut: () => {
-      return "Mutation.logOut";
+    logOut: (): Viewer => {
+      try {
+        return { didRequest: true };
+      } catch (error) {
+        throw new Error(`Failed to log out: ${error}`);
+      }
     },
   },
   Viewer: {
