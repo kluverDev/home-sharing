@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import express, { Application } from "express";
-import bodyParser from "body-parser";
 require("dotenv").config();
 import { connectDatabase } from "./database";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs } from "./graphql/typeDefs";
 import { resolvers } from "./graphql/resolvers/index";
+import cookieParser from "cookie-parser";
 
 const mount = async (app: Application) => {
   const db = await connectDatabase();
-  app.use(bodyParser.json());
+  app.use(cookieParser(process.env.SECRET));
+
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => ({ db }), //provides db in all resolvers via context
+    context: ({ req, res }) => ({ db, req, res }), //provides db in all resolvers via context
   }); // my appolo server
   server.applyMiddleware({ app, path: "/api" }); //specifying express app instance & graphql api
   app.listen(process.env.PORT);
