@@ -1,5 +1,10 @@
 import { ObjectId, Collection } from "mongodb";
 
+export interface UserBookingsData {
+  total: number;
+  result: Booking[];
+}
+
 export interface Viewer {
   _id?: string;
   token?: string;
@@ -25,6 +30,7 @@ export interface User {
   income: number;
   bookings: ObjectId[];
   listings: ObjectId[];
+  authorized?: boolean;
 }
 export interface Database {
   listings: Collection<Listing>;
